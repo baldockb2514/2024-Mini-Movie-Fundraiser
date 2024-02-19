@@ -54,9 +54,9 @@ def string_check(question, answer_list, num_letters, error):
         response = input(question).lower().replace(" ", "")
 
         while True:
-            for item in answer_list:
-                if response == item[:num_letters] or response == item:
-                    return item
+            for answer in answer_list:
+                if response == answer[:num_letters] or response == answer:
+                    return answer
 
             # If not, print error
             else:
@@ -124,7 +124,11 @@ while tickets_sold < MAX_TICKETS:
     name = not_blank("Please enter your name or 'xxx' to quit: ")
 
     if name == 'xxx':
-        break
+        if len(all_names) == 0:
+            print("You must sell at least ONE ticket before quitting")
+            continue
+        else:
+            break
 
     age = num_check("Please enter your age: ")
 
@@ -163,10 +167,6 @@ while tickets_sold < MAX_TICKETS:
     all_names.append(name)
     all_ticket_costs.append(ticket_price)
     all_surcharge.append(surcharge)
-
-if len(all_names) == 0:
-    print("See you Later ;)")
-    exit()
 
 # create data frame from dictionary to organise information
 mini_movie_frame = pandas.DataFrame(mini_movie_dict)
@@ -244,4 +244,3 @@ for item in to_write:
 
 # close file
 text_file.close()
-
